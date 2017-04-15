@@ -7,9 +7,9 @@
 version: "2"
 services:
     db:
-        image: postgres:9.5.2
+        image: postgres:9.5.5
         volumes:
-            - /opt/starter/psql:/var/lib/postgresql/data/pgdata
+            - /opt/mysite/psql:/var/lib/postgresql/data/pgdata
         env_file:
             - ./config/environment/development.env
 
@@ -31,7 +31,7 @@ services:
         build:
             context: webapp
         volumes:
-            - ./webapp/starter:/srv/starter
+            - ./webapp/mysite:/srv/mysite
             - /srv/static-files
         expose:
             - "8000"

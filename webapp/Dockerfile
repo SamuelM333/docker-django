@@ -1,11 +1,11 @@
-FROM python:3.4
+FROM python:2.7
 
 # Add code
-ADD ./starter /srv/starter
+ADD ./mysite /srv/mysite
 
 # Install application requirements
-ADD ./config/requirements.txt /srv/starter/
-RUN pip3 install -r /srv/starter/requirements.txt
+ADD ./config/requirements.txt /srv/mysite/
+RUN pip install -r /srv/mysite/requirements.txt
 
 # Add start script
 ADD ./config/start.sh /
@@ -18,7 +18,7 @@ ADD ./config/database-check.py /srv/config/database-check.py
 
 # Create django user, will own the Django app
 RUN adduser --no-create-home --disabled-login --group --system django
-RUN chown -R django:django /srv/starter
+RUN chown -R django:django /srv/mysite
 
 # Execute start script
 CMD ["./start.sh"]
