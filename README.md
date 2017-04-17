@@ -124,7 +124,7 @@ See processes:
 ```bash
 $ docker-compose ps                 # docker-compose processes
 $ docker ps -a                      # docker processes (sometimes needed)
-$ docker stats [container name]     # see live docker container metrics
+$ docker stats [container_name]     # see live docker container metrics
 ```
 
 Run commands in container:
@@ -150,30 +150,26 @@ To initiate a command in an existing running container use the `docker exec`
 command.
 
 ```bash
-# Find container_name by using docker-compose ps
+# List containers 
+$ docker-compose ps
 
-# restart uwsgi in a running container.
-$ docker exec [container_name] touch /etc/uwsgi/reload-uwsgi.ini
+# Restart uwsgi in a running container.
+$ docker exec [container-name] touch /etc/uwsgi/reload-uwsgi.ini
 
-# create migration file for an app
-$ docker exec -it [container-name] \
-    python /srv/[project-name]/manage.py makemigrations scheduler
+# Create migration file for an app
+$ docker exec -it [container-name] python /srv/mysite/manage.py makemigrations scheduler
 
-# migrate
-$ docker exec -it [container-name] \
-    python3 /srv/[project-name]/manage.py migrate
+# Migrate
+$ docker exec -it [container-name] python /srv/mysite/manage.py migrate
 
-# get sql contents of a migration
-$ docker exec -it [container-name] \
-    python3 /srv/[project-name]/manage.py sqlmigrate [appname] 0001
+# Get sql contents of a migration
+$ docker exec -it [container-name] python /srv/mysite/manage.py sqlmigrate [appname] 0001
 
-# get to interactive console
-$ docker exec -it [container-name] \
-    python3 /srv/[project-name]/manage.py shell
+# Get to interactive console
+$ docker exec -it [container-name] python /srv/mysite/manage.py shell
 
-# testing
-docker exec [container-name] \
-    python3 /srv/[project-name]/manage.py test
+# Testing
+docker exec [container-name] python /srv/mysite/manage.py test
 ```
 
 ## Troubleshooting
