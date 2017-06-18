@@ -1,29 +1,15 @@
 Docker Django
 -------------
 
-[![Circle CI](https://circleci.com/gh/erroneousboat/docker-django/tree/master.svg?style=shield)](https://circleci.com/gh/erroneousboat/docker-django/tree/master)
-
-## tl;dr
-```bash
-$ git clone git@github.com:erroneousboat/docker-django.git
-$ docker-compose up
-# the application is now available at: https://localhost
-```
-
-A project to get you started with Docker and Django. This is made to
-serve as an example for you to hack on. I don't claim that this is the
-correct way to setup a system with Django and Docker, and if you have any
-suggestions, please fork the project, send a pull-request or create an issue.
-See the issues for the things I'm working on now.
 
 Stack and version numbers used:
 
 | Name           | Version |
 |----------------|---------|
-| Docker         | 1.11.1  |
-| Docker Compose | 1.7.1   |
+| Docker Compose | 1.12.0  |
 | Nginx          | 1.10    |
-| Postgresql     | 9.5.2   |
+| Postgresql     | 9.5.5   |
+| Python         | 2.7.x   |
 | uWSGI          | 2.0.12  |
 
 ## Folder structure
@@ -65,22 +51,13 @@ chmod +x /usr/local/bin/docker-compose
 Check the [github project](https://github.com/docker/docker-compose/releases) for new releases
 
 ### Django
-Create django project in the `webapp` folder or copy a project to the `webapp`
-folder or use the sample project enclosed in this project and go directly to
-the section 'Fire it up':
-
-```bash
-# be sure your have Django installed on your system
-$ django-admin startproject <name_project>
-```
+Copy the `mysite` folder to the `webapp` folder. 
 
 Edit `config/environment/development.env` file and add the name of your
-project at `DJANGO_PROJECT_NAME` or just leave it as is to start the default
-application.
+project at `DJANGO_PROJECT_NAME`.
 
 
-Edit the `settings.py` file with the correct database credentials and static
-root:
+Edit the `settings.py` file with the correct database credentials and static root:
 
 ```python
 DATABASES = {
@@ -135,6 +112,12 @@ $ docker-compose run [service_name] python manage.py shell
 $ docker-compose run [service_name] env                         # env vars
 ```
 
+See logs
+```bash
+$ docker-compose logs -f webapp
+$ docker-compose logs -f webserver
+```
+
 Remove all docker containers:
 ```bash
 docker rm $(docker ps -a -q)
@@ -150,9 +133,6 @@ To initiate a command in an existing running container use the `docker exec`
 command.
 
 ```bash
-# List containers 
-$ docker-compose ps
-
 # Restart uwsgi in a running container.
 $ docker exec [container-name] touch /etc/uwsgi/reload-uwsgi.ini
 
