@@ -58,5 +58,11 @@ target/
 
 webapp/mysite
 config/environment/*
+services/webserver/config/*.crt
+services/webserver/config/*.key
+!services/webserver/config/localhost.crt
+!services/webserver/config/localhost.key
+
+*.bak
 
 \.DS_Store
