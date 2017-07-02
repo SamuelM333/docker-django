@@ -4,8 +4,10 @@ FROM python:2.7
 ADD ./mysite /srv/mysite
 
 # Install application requirements
-ADD ./config/requirements.txt /srv/mysite/
+ADD ./mysite/requirements.txt /srv/mysite/
 RUN pip install -r /srv/mysite/requirements.txt
+
+# Split Dockerfile here
 
 # Add start script
 ADD ./config/start.sh /
