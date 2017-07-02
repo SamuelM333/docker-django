@@ -7,7 +7,7 @@ Stack and version numbers used:
 | Name           | Version |
 |----------------|---------|
 | Docker Compose | 1.12.0  |
-| Nginx          | 1.10    |
+| Nginx          | 1.11    |
 | Postgresql     | 9.5.5   |
 | Python         | 2.7.x   |
 | uWSGI          | 2.0.12  |
@@ -118,6 +118,11 @@ $ docker-compose logs -f webapp
 $ docker-compose logs -f webserver
 ```
 
+Print log directory 
+```bash
+$ docker inspect --format='{{.LogPath}}' containername
+```
+
 Remove all docker containers:
 ```bash
 docker rm $(docker ps -a -q)
@@ -174,4 +179,7 @@ A: Remember to restart uWSGI for the changes to take effect.
 ```bash
 # Find container_name by using docker-compose ps
 $ docker exec [container_name] touch /etc/uwsgi/reload-uwsgi.ini
+
+# Example
+$ docker exec docker_webapp_1 touch /etc/uwsgi/reload-uwsgi.ini
 ```
